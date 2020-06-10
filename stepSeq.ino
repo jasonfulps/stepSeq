@@ -21,7 +21,7 @@ LiquidCrystal_I2C lcd(0x27,20,4);  // set the LCD address to 0x27 for a 16 chars
 #define RESET A1
 
 // Step Constants
-#define SEQ_LEN_MAX 16
+#define SEQ_LEN_MAX 64
 #define STEP_VALUE_MAX 1
 #define STEP_VALUE_INREMENT_MAX 2
 
@@ -34,6 +34,7 @@ String consoleRow1 = "Row 1";
 String consoleRow2 = "Row 2";
 
 // LCD Display
+int lcdMode = 0; // 0 steps, 1 step details
 int lcdUpdated = 0;
 String lcdRow1 = "Row 1";
 String lcdRow2 = "Row 2";
@@ -69,4 +70,39 @@ int stepDisplayBarSpacerChar = 1;
 // Step Value Variables
 int stepValueIncrementIdx = 0;
 float stepValueIncrements[STEP_VALUE_INREMENT_MAX+1] = {.10, .05, .01};
-float stepValues[SEQ_LEN_MAX] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+float stepValues[SEQ_LEN_MAX] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+
+// LCD Custom Chars
+byte blank[] = {
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+};
+
+byte frame[] = {
+  B11111,
+  B10001,
+  B10001,
+  B10001,
+  B10001,
+  B10001,
+  B10001,
+  B11111,
+};
+
+byte all[] = {
+  B11111,
+  B11111,
+  B11111,
+  B11111,
+  B11111,
+  B11111,
+  B11111,
+  B11111,
+};
+

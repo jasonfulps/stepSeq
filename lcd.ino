@@ -1,30 +1,36 @@
 void stepSeqLcd(){
 
   if(millis() - lcdUpdated > DISPLAY_UPDATE_RATE) {
-
-    String stepValueIdxDisplay = "STEP " + String(stepValueIdx + 1 ) + " ";
-    String stepValueDisplay = String(stepValues[stepValueIdx]) + "v ";
-    String newLcdRow1 = stepValueIdxDisplay + stepValueDisplay;    
-    String newRow2 = "CLK  " + String(stepIdx + 1) + " " + String(stepValues[stepIdx]) + "v ";
-
-//    lcd.clear();
-//    lcd.setCursor ( 0, 0 );            // go to the top left corner
-//    lcd.print("FOO ..."); // write this string on the top row
   
+    if(lcdMode == 0){
+      lcd.setCursor ( 0, 0 );            
+      lcd.write(0);         
+      lcd.setCursor ( 1, 0 );            
+      lcd.write(1);         
+      lcd.setCursor ( 2, 0 );            
+      lcd.write(2);         
 
-    if(newRow2 != lcdRow2 || newLcdRow1 != lcdRow1){      
-      lcd.setCursor ( 0, 0 );            // go to the top left corner
-      lcd.print(newLcdRow1); // write this string on the top row      
-      lcd.setCursor ( 0, 1);            // go to the top left corner
-      lcd.print(newRow2); // write this string on the top row      
-      lcd.setCursor ( 0, 2);            // go to the top left corner
-      lcd.print(renderLcdSteps());
-      lcd.setCursor ( stepIdx, 2);            
-      lcdRow1 = newLcdRow1;      
-      lcdRow2 = newRow2;
-    }      
+    }
+  
+    if(lcdMode == 1){      
+        String stepValueIdxDisplay = "STEP " + String(stepValueIdx + 1 ) + " ";
+        String stepValueDisplay = String(stepValues[stepValueIdx]) + "v ";
+        String newLcdRow1 = stepValueIdxDisplay + stepValueDisplay;    
+        String newRow2 = "CLK  " + String(stepIdx + 1) + " " + String(stepValues[stepIdx]) + "v ";
+      
+        if(newRow2 != lcdRow2 || newLcdRow1 != lcdRow1){      
+          lcd.setCursor ( 0, 0 );            
+          lcd.print(newLcdRow1); 
+          lcd.setCursor ( 0, 1); 
+          lcd.print(newRow2);
+          lcd.setCursor ( stepIdx, 2);            
+          lcdRow1 = newLcdRow1;      
+          lcdRow2 = newRow2;
+        }      
+    }
+    
     lcdUpdated = millis();
-  }    
+  }
 }
 
 String renderLcdSteps() {

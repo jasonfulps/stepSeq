@@ -34,4 +34,8 @@ void setup() {
   // Setup Serial Monitor
   Serial.begin(9600);
 
+  // LCD Custom Chars
+  lcd.createChar(0, blank);
+  lcd.createChar(1, all);
+  lcd.createChar(2, frame);
 }
